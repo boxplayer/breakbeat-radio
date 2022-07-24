@@ -1,15 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
+import YouTube, { YouTubeEvent } from "react-youtube";
 
-export const YoutubeEmbed = ({ embedId }: { embedId: string }) => (
-  <div className="video-responsive">
-    <iframe
-      width="853"
-      height="480"
-      src={`https://www.youtube.com/embed/${embedId}?autoplay=1`}
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-      title="Embedded youtube"
+var cElement: YouTubeEvent;
+
+const opts = {
+  playerVars: {
+    autoplay: 0,
+    mute: 0,
+    disablekb: 1,
+  },
+};
+
+export const YouTubeEmbed = ({
+  videoId,
+  play,
+  volume,
+}: {
+  videoId: string;
+  play: boolean;
+  volume: string;
+}) => {
+  console.log({ play });
+
+  useEffect(() => {
+    if (cElement) {
+      const player = cElement.target;
+      play ? player.playVideo() : player.pauseVideo();
+      player.setVolume(volume);
+    }
+  }, [play, volume]);
+
+  const storeEvent = (event: YouTubeEvent) => {
+    cElement = event;
+  };
+
+  return (
+    <YouTube
+      videoId={videoId} // defaults -> ''
+      opts={opts} // defaults -> {}
+      onReady={storeEvent} // defaults -> noop
+      //   onPlay={func} // defaults -> noop
+      //   onPause={func} // defaults -> noop
+      //   onEnd={func} // defaults -> noop
+      //   onError={func} // defaults -> noop
+      //   onStateChange={func} // defaults -> noop
+      //   onPlaybackRateChange={func} // defaults -> noop
+      //   onPlaybackQualityChange={func} // defaults -> noop
     />
-  </div>
-);
+  );
+};

@@ -1,5 +1,17 @@
 .container {
   padding: 0 2rem;
+  background-image: url('/lofi-wallpaper.jpg');
+  background-size: cover;
+  z-index: 1
+}
+
+.youtubePlayer {
+  position: fixed;
+  inset: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
 }
 
 .main {
@@ -43,6 +55,7 @@
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
+  color: white
 }
 
 .title,

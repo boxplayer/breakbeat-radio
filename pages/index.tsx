@@ -1,32 +1,39 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useEffect, useState, KeyboardEvent } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { YoutubeEmbed } from "./YouTubeEmbed";
+import { YouTubeEmbed } from "./YouTubeEmbed";
+import { MediaButtons } from "./MediaButtons";
 
-const coffeeShopLofiId = "-5KAN9_CzSA";
+export const lofiIds = [
+  "-5KAN9_CzSA",
+  "jfKfPfyJRdk",
+  "ceqgwo7U28Y",
+  "rUxyKA_-grg",
+  "qmI2YCrod00",
+];
 
 const Home: NextPage = () => {
-  const [play, setPlay] = useState(true);
-
-  console.log({ play });
+  const [playing, setPlaying] = useState(false);
+  const [volume, setVolume] = useState("60");
+  const [currentTrack, setCurrentTrack] = useState(lofiIds[0]);
 
   useEffect(() => {
-    function handleKeyDown(e: any) {
-      console.log(e.keyCode);
-      if (e.keyCode === 32) {
-        setPlay(!play);
+    function handleKeyDown(e: any): any {
+      console.log(e.code);
+      if (e.code === "Space") {
+        e.preventDefault();
+        setPlaying((prevProps) => !prevProps);
       }
     }
 
     document.addEventListener("keydown", handleKeyDown);
 
-    // Don't forget to clean up
     return function cleanup() {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [play]);
+  }, [playing]);
 
   return (
     <div className={styles.container}>
@@ -36,20 +43,19 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <YoutubeEmbed embedId={coffeeShopLofiId} />
-
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <div className={styles.youtubePlayer}>
+          <YouTubeEmbed videoId={currentTrack} play={playing} volume={volume} />
+        </div>
+        <h1 className={styles.title}>Lo-Fi Radio</h1>
 
-        <p className={styles.description}>
+        {/* <p className={styles.description}>
           Get started by editing{" "}
           <code className={styles.code}>pages/index.tsx</code>
-        </p>
+        </p> */}
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
+          {/* <a href="https://nextjs.org/docs" className={styles.card}>
             <h2>Documentation &rarr;</h2>
             <p>Find in-depth information about Next.js features and API.</p>
           </a>
@@ -75,12 +81,19 @@ const Home: NextPage = () => {
             <p>
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
-          </a>
+          </a> */}
         </div>
       </main>
 
       <footer className={styles.footer}>
-        <a
+        <MediaButtons
+          volume={volume}
+          setVolume={setVolume}
+          playing={playing}
+          setPlaying={setPlaying}
+          setCurrentTrack={setCurrentTrack}
+        />
+        {/* <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
@@ -89,7 +102,7 @@ const Home: NextPage = () => {
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
-        </a>
+        </a> */}
       </footer>
     </div>
   );
