@@ -1,6 +1,6 @@
 .container {
   padding: 0 2rem;
-  background-image: url('/lofi-wallpaper.jpg');
+  /* background-image: url('/lofi-wallpaper.jpg'); */
   background-size: cover;
   z-index: 1
 }
@@ -24,7 +24,7 @@
   align-items: center;
 }
 
-.footer {
+.mediaPlayer {
   display: flex;
   flex: 1;
   padding: 2rem 0;

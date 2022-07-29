@@ -20,8 +20,6 @@ export const YouTubeEmbed = ({
   play: boolean;
   volume: string;
 }) => {
-  console.log({ play });
-
   useEffect(() => {
     if (cElement) {
       const player = cElement.target;
