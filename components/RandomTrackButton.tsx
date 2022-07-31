@@ -1,13 +1,14 @@
-import { lofiIds } from ".";
+import { IoShuffle } from "react-icons/io5";
 
-export const RandomTrackButton = ({
+export const ShuffleButton = ({
   setCurrentTrack,
+  lofiIds,
 }: {
   setCurrentTrack: (value: string) => void;
+  lofiIds: string[];
 }) => (
-  <button
+  <IoShuffle
+    size={30}
     onClick={() => setCurrentTrack(lofiIds[Math.floor(Math.random() * 5)])}
-  >
-    random track
-  </button>
+  />
 );

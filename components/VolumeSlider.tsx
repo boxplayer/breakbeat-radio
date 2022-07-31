@@ -12,7 +12,7 @@ export const VolumeSlider = ({
     min="0"
     max="100"
     step="20"
-    // className={styles.slider}
+    className={"align-center"}
     id="myRange"
     onChange={(e: ChangeEvent<HTMLInputElement>) => setVolume(e.target.value)}
     value={volume}

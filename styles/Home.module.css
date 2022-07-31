@@ -1,43 +1,15 @@
-.container {
-  padding: 0 2rem;
-  /* background-image: url('/lofi-wallpaper.jpg'); */
-  background-size: cover;
-  z-index: 1
-}
-
-.youtubePlayer {
-  position: fixed;
-  inset: 0px;
+.row {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
+.column {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.mediaPlayer {
-  display: flex;
+  flex-basis: 100%;
   flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
 }
 
 .title a {
