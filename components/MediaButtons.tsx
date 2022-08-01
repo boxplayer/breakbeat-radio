@@ -1,3 +1,4 @@
+import { NowPlaying } from "./NowPlaying";
 import { PlayPauseButton } from "./PlayPauseButton";
 import { ShuffleButton } from "./RandomTrackButton";
 import { VolumeSlider } from "./VolumeSlider";

@@ -5,6 +5,7 @@ import styles from "../styles/Home.module.css";
 import { YouTubeEmbed } from "../components/YouTubeEmbed";
 import { MediaButtons } from "../components/MediaButtons";
 import { SocialMediaButtons } from "../components/SocialMediaButtons";
+import { NowPlaying } from "../components/NowPlaying";
 
 export const lofiIds = [
   "-5KAN9_CzSA",
@@ -62,14 +63,21 @@ const Home: NextPage = () => {
           {introMessage ? (
             <p className={`text-2xl`}> Press space to start playing...</p>
           ) : (
-            <MediaButtons
-              volume={volume}
-              setVolume={setVolume}
-              playing={playing}
-              setPlaying={setPlaying}
-              setCurrentTrack={setCurrentTrack}
-              lofiIds={lofiIds}
-            />
+            <div>
+              <div className={styles.row}>
+                <MediaButtons
+                  volume={volume}
+                  setVolume={setVolume}
+                  playing={playing}
+                  setPlaying={setPlaying}
+                  setCurrentTrack={setCurrentTrack}
+                  lofiIds={lofiIds}
+                />
+              </div>
+              <div className={`${styles.row} items-end mt-2`}>
+                <NowPlaying />
+              </div>
+            </div>
           )}
         </div>
       </main>
