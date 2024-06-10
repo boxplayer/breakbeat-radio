@@ -1,4 +1,3 @@
-import { NowPlaying } from "./NowPlaying";
 import { PlayPauseButton } from "./PlayPauseButton";
 import { ShuffleButton } from "./RandomTrackButton";
 import { VolumeSlider } from "./VolumeSlider";
@@ -9,21 +8,21 @@ export const MediaButtons = ({
   playing,
   setPlaying,
   setCurrentTrack,
-  lofiIds,
+  breakIds,
 }: {
-  volume: string;
-  setVolume: (value: string) => void;
+  volume: number;
+  setVolume: (value: number) => void;
   playing: boolean;
   setPlaying: (value: boolean) => void;
   setCurrentTrack: (value: string) => void;
-  lofiIds: string[];
+  breakIds: string[];
 }) => (
   <>
     <div className={"mr-2"}>
       <PlayPauseButton playing={playing} setPlaying={setPlaying} />
     </div>
     <div className={"mr-2"}>
-      <ShuffleButton setCurrentTrack={setCurrentTrack} lofiIds={lofiIds} />
+      <ShuffleButton setCurrentTrack={setCurrentTrack} breakIds={breakIds} />
     </div>
     <div className={"mr-2 flex"}>
       <VolumeSlider volume={volume} setVolume={setVolume} />

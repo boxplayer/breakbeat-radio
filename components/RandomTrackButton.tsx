@@ -2,13 +2,13 @@ import { IoShuffle } from "react-icons/io5";
 
 export const ShuffleButton = ({
   setCurrentTrack,
-  lofiIds,
+  breakIds,
 }: {
   setCurrentTrack: (value: string) => void;
-  lofiIds: string[];
+  breakIds: string[];
 }) => (
   <IoShuffle
     size={30}
-    onClick={() => setCurrentTrack(lofiIds[Math.floor(Math.random() * 5)])}
+    onClick={() => setCurrentTrack(breakIds[Math.floor(Math.random() * 5)])}
   />
 );

@@ -1,15 +1,6 @@
-import React, { useEffect } from "react";
-import YouTube, { YouTubeEvent } from "react-youtube";
-
-var cElement: YouTubeEvent;
-
-const opts = {
-  playerVars: {
-    autoplay: 0,
-    mute: 0,
-    disablekb: 1,
-  },
-};
+import dynamic from "next/dynamic";
+import React from "react";
+const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 export const YouTubeEmbed = ({
   videoId,
@@ -18,34 +9,13 @@ export const YouTubeEmbed = ({
 }: {
   videoId: string;
   play: boolean;
-  volume: string;
-}) => {
-  useEffect(() => {
-    if (cElement) {
-      const player = cElement.target;
-      play ? player.playVideo() : player.pauseVideo();
-      player.setVolume(volume);
-      console.log("Stuff");
-      console.log(player.getVideoData());
-    }
-  }, [play, volume]);
-
-  const storeEvent = (event: YouTubeEvent) => {
-    cElement = event;
-  };
-
-  return (
-    <YouTube
-      videoId={videoId} // defaults -> ''
-      opts={opts} // defaults -> {}
-      onReady={storeEvent} // defaults -> noop
-      //   onPlay={func} // defaults -> noop
-      //   onPause={func} // defaults -> noop
-      //   onEnd={func} // defaults -> noop
-      //   onError={func} // defaults -> noop
-      //   onStateChange={func} // defaults -> noop
-      //   onPlaybackRateChange={func} // defaults -> noop
-      //   onPlaybackQualityChange={func} // defaults -> noop
+  volume: number;
+}) => (
+  <div>
+    <ReactPlayer
+      url={`https://www.youtube.com/watch?v=${videoId}`}
+      playing={play}
+      volume={volume}
     />
-  );
-};
+  </div>
+);

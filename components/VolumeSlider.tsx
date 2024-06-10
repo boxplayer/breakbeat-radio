@@ -4,8 +4,8 @@ export const VolumeSlider = ({
   volume,
   setVolume,
 }: {
-  volume: string;
-  setVolume: (value: string) => void;
+  volume: number;
+  setVolume: (value: number) => void;
 }) => (
   <input
     type="range"
@@ -14,8 +14,10 @@ export const VolumeSlider = ({
     step="20"
     className={"align-center"}
     id="myRange"
-    onChange={(e: ChangeEvent<HTMLInputElement>) => setVolume(e.target.value)}
-    value={volume}
+    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+      setVolume(Number(e.target.value) / 100)
+    }
+    value={(volume * 100).toString()}
     // style={{
     //   background: `linear-gradient(90deg, var(--volumeUsed) ${
     //     value * 100

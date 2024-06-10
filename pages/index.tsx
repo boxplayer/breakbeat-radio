@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useEffect, useState, KeyboardEvent } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { YouTubeEmbed } from "../components/YouTubeEmbed";
@@ -7,19 +7,25 @@ import { MediaButtons } from "../components/MediaButtons";
 import { SocialMediaButtons } from "../components/SocialMediaButtons";
 import { NowPlaying } from "../components/NowPlaying";
 
-export const lofiIds = [
-  "-5KAN9_CzSA",
-  "jfKfPfyJRdk",
-  "ceqgwo7U28Y",
-  "rUxyKA_-grg",
-  "qmI2YCrod00",
+export const breakIds = [
+  "8CHva3gBp68&t",
+  "zSCzORZQsjQ",
+  "A9UW7i6Pj3Q",
+  "Owldd4hs7wQ&t",
 ];
+
+export const fetchData = async () => {
+  const metadata = await fetch(
+    "https://noembed.com/embed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DyEuXlaXdWhs",
+  );
+  return metadata;
+};
 
 const Home: NextPage = () => {
   const [introMessage, setIntroMessage] = useState(true);
   const [playing, setPlaying] = useState(false);
-  const [volume, setVolume] = useState("60");
-  const [currentTrack, setCurrentTrack] = useState(lofiIds[0]);
+  const [volume, setVolume] = useState(0.6);
+  const [currentTrack, setCurrentTrack] = useState(breakIds[0]);
 
   useEffect(() => {
     function handleKeyDown(e: any): any {
@@ -32,6 +38,20 @@ const Home: NextPage = () => {
         e.preventDefault();
         setPlaying((prevProps) => !prevProps);
       }
+
+      if (e.code === "ArrowUp") {
+        e.preventDefault();
+        if (volume <= 0.8) {
+          setVolume((prevProps) => prevProps + 0.2);
+        }
+      }
+
+      if (e.code === "ArrowDown") {
+        e.preventDefault();
+        if (volume > 0) {
+          setVolume((prevProps) => prevProps - 0.2);
+        }
+      }
     }
 
     document.addEventListener("keydown", handleKeyDown);
@@ -39,7 +59,7 @@ const Home: NextPage = () => {
     return function cleanup() {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [playing, introMessage]);
+  }, [playing, introMessage, volume]);
 
   return (
     <div className={"bg-cover z-10 bg-main-wall"}>
@@ -55,7 +75,7 @@ const Home: NextPage = () => {
         </div>
 
         <div className={`${styles.row} justify-between pt-3 p-8`}>
-          <h1 className={styles.title}>LO-FI RADIO</h1>
+          <h1 className={styles.title}>BREAKBEAT RADIO</h1>
           <SocialMediaButtons />
         </div>
 
@@ -71,7 +91,7 @@ const Home: NextPage = () => {
                   playing={playing}
                   setPlaying={setPlaying}
                   setCurrentTrack={setCurrentTrack}
-                  lofiIds={lofiIds}
+                  breakIds={breakIds}
                 />
               </div>
               <div className={`${styles.row} items-end mt-2`}>
