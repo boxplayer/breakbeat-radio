@@ -75,7 +75,7 @@ const Home: NextPage = () => {
                 />
               </div>
               <div className={`${styles.row} items-end mt-2`}>
-                <NowPlaying />
+                <NowPlaying playing={playing} />
               </div>
             </div>
           )}

@@ -25,6 +25,8 @@ export const YouTubeEmbed = ({
       const player = cElement.target;
       play ? player.playVideo() : player.pauseVideo();
       player.setVolume(volume);
+      console.log("Stuff");
+      console.log(player.getVideoData());
     }
   }, [play, volume]);
 
