@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-type Metadata = {
+type NeoembedResponse = {
   width: number;
   thumbnail_width: number;
   provider_name: string;
@@ -18,6 +18,11 @@ type Metadata = {
   version: string;
 };
 
+type VideoMetadata = {
+  videoId: string;
+  metadata: NeoembedResponse;
+};
+
 //TODO: make sure the api is called only once
 export const NowPlaying = ({
   playing,
@@ -26,7 +31,7 @@ export const NowPlaying = ({
   playing: boolean;
   videoId: string;
 }) => {
-  const [data, setData] = useState<Metadata | null>(null);
+  const [data, setData] = useState<VideoMetadata | null>(null);
 
   useEffect(() => {
     if (videoId) {
@@ -34,8 +39,8 @@ export const NowPlaying = ({
         const response = await fetch(
           `https://noembed.com/embed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D${videoId}`,
         );
-        const result: Metadata = await response.json();
-        setData(result);
+        const result: NeoembedResponse = await response.json();
+        setData({ videoId, metadata: result });
       };
       fetchData();
     }
@@ -52,7 +57,7 @@ export const NowPlaying = ({
         />
       )}
       <div className={"ml-2 text-2xl"}>
-        <h1>{data?.title ?? "searching..."}</h1>
+        <h1>{data?.metadata?.title ?? "searching..."}</h1>
       </div>
     </>
   );
