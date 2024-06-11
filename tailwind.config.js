@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "main-wall": "url('../public/lofi-wallpaper.jpg')",
+        // "main-wall": "url('../public/lofi-wallpaper.jpg')",
       },
     },
   },
