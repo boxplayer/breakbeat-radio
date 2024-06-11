@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { IoPlay, IoPause } from "react-icons/io5";
 
 export const PlayPauseButton = ({
@@ -8,9 +7,6 @@ export const PlayPauseButton = ({
   playing: boolean;
   setPlaying: (value: boolean) => void;
 }) => {
-  // const [pauseFilled, setPauseFilled] = useState(false);
-  // const [playFilled, setPlayFilled] = useState(false);
-
   return playing ? (
     <IoPause className={"hover:"} size={30} onClick={() => setPlaying(false)} />
   ) : (

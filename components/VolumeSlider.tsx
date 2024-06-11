@@ -18,10 +18,5 @@ export const VolumeSlider = ({
       setVolume(Number(e.target.value) / 100)
     }
     value={(volume * 100).toString()}
-    // style={{
-    //   background: `linear-gradient(90deg, var(--volumeUsed) ${
-    //     value * 100
-    //   }%, var(--volumeLeft) ${value * 100}%)`,
-    // }}
   />
 );
