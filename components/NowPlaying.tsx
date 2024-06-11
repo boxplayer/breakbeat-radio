@@ -24,6 +24,7 @@ type VideoMetadata = {
 };
 
 //TODO: make sure the api is called only once
+//
 export const NowPlaying = ({
   playing,
   videoId,
