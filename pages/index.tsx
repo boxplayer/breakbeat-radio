@@ -6,22 +6,41 @@ import { YouTubeEmbed } from "../components/YouTubeEmbed";
 import { MediaButtons } from "../components/MediaButtons";
 import { SocialMediaButtons } from "../components/SocialMediaButtons";
 import { NowPlaying } from "../components/NowPlaying";
+import { getRandomTrackId } from "../components/RandomTrackButton";
 
-export const breakIds = [
+export const TrackIds = [
   "8CHva3gBp68&t",
   "zSCzORZQsjQ",
   "A9UW7i6Pj3Q",
   "Owldd4hs7wQ&t",
+  "8diCWQ5HU0I",
+  "wMFfy9-VS6Y",
+  "pCGmlm8HvBI",
+  "DrmpZtxr0kY",
+  "qXfdneeIZnw",
+  "83YU83Q0jXA",
+  "yEUOXeTccSk",
+  "ulU8B-FdABA",
+  "u9o1OYX5UOQ",
+  "xgvpvO2Fx8U",
+  "MUoCWXwPUIM",
+  "9dKSf8IlXNM",
+  "vRZHyKnCPZU",
+  "0KaBYaQGwbs",
+  "3O3vncqnFWY",
+  "0KgL3FwzjBE",
+  "T_-jjh2sX4Q",
 ];
 
 const Home: NextPage = () => {
   const [introMessage, setIntroMessage] = useState(true);
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.6);
-  const [currentTrack, setCurrentTrack] = useState(breakIds[0]);
+  const [currentTrack, setCurrentTrack] = useState(getRandomTrackId(TrackIds));
 
+  //TODO: export these to reusable functions
   useEffect(() => {
-    function handleKeyDown(e: any): any {
+    function handleKeyDown(e: KeyboardEvent): any {
       if (e.code === "Space" && introMessage === true) {
         e.preventDefault();
         setIntroMessage(false);
@@ -45,6 +64,27 @@ const Home: NextPage = () => {
           setVolume((prevProps) => prevProps - 0.2);
         }
       }
+
+      if (e.code === "ArrowLeft") {
+        e.preventDefault();
+        const currentTrackIndex = TrackIds.indexOf(currentTrack);
+        if (currentTrackIndex === 0) {
+          setCurrentTrack(TrackIds[TrackIds.length - 1]);
+        } else {
+          setCurrentTrack(TrackIds[currentTrackIndex - 1]);
+        }
+      }
+
+      if (e.code === "ArrowRight") {
+        e.preventDefault();
+
+        const currentTrackIndex = TrackIds.indexOf(currentTrack);
+        if (currentTrackIndex === TrackIds.length) {
+          setCurrentTrack(TrackIds[0]);
+        } else {
+          setCurrentTrack(TrackIds[currentTrackIndex + 1]);
+        }
+      }
     }
 
     document.addEventListener("keydown", handleKeyDown);
@@ -52,7 +92,7 @@ const Home: NextPage = () => {
     return function cleanup() {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [playing, introMessage, volume]);
+  }, [playing, introMessage, volume, currentTrack]);
 
   return (
     <div className={"bg-cover z-10 bg-main-wall"}>
@@ -83,8 +123,8 @@ const Home: NextPage = () => {
                   setVolume={setVolume}
                   playing={playing}
                   setPlaying={setPlaying}
+                  currentTrack={currentTrack}
                   setCurrentTrack={setCurrentTrack}
-                  breakIds={breakIds}
                 />
               </div>
               <div className={`${styles.row} items-end mt-2`}>

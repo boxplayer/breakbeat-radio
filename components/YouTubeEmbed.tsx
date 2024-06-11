@@ -16,6 +16,7 @@ export const YouTubeEmbed = ({
       url={`https://www.youtube.com/watch?v=${videoId}`}
       playing={play}
       volume={volume}
+      loop={true}
     />
   </div>
 );

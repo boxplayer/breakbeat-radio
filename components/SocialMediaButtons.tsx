@@ -1,26 +1,21 @@
-import {
-  FaTwitterSquare,
-  FaTwitter,
-  FaFacebookSquare,
-  FaInstagramSquare,
-} from "react-icons/fa";
+import { IoLogoInstagram, IoLogoTwitter, IoLogoFacebook } from "react-icons/io";
 
 const iconSize = 24;
 
 export const SocialMediaButtons = () => {
   return (
     <div className={`flex items-center pl-10`}>
-      <FaTwitterSquare
+      <IoLogoTwitter
         className={"hover:ring-black m-1"}
         color="white"
         size={iconSize}
       />
-      <FaFacebookSquare
+      <IoLogoFacebook
         className={"hover:bg-black m-1"}
         color="white"
         size={iconSize}
       />
-      <FaInstagramSquare
+      <IoLogoInstagram
         className={"hover:bg-black m-1"}
         color="white"
         size={iconSize}
