@@ -8,8 +8,8 @@ export const PlayPauseButton = ({
   playing: boolean;
   setPlaying: (value: boolean) => void;
 }) => {
-  const [pauseFilled, setPauseFilled] = useState(false);
-  const [playFilled, setPlayFilled] = useState(false);
+  // const [pauseFilled, setPauseFilled] = useState(false);
+  // const [playFilled, setPlayFilled] = useState(false);
 
   return playing ? (
     <IoPause className={"hover:"} size={30} onClick={() => setPlaying(false)} />

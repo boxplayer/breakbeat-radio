@@ -1,9 +1,46 @@
 import Image from "next/image";
-import { fetchData } from "../pages";
+import { useEffect, useState } from "react";
 
-// TODO: possible to get track id?
-export const NowPlaying = ({ playing }: { playing: boolean }) => {
-  // const metadat = await fetchData();
+type Metadata = {
+  width: number;
+  thumbnail_width: number;
+  provider_name: string;
+  author_url: string;
+  thumbnail_url: string;
+  author_name: string;
+  title: string;
+  height: number;
+  type: string;
+  provider_url: string;
+  html: string;
+  url: string;
+  thumbnail_height: number;
+  version: string;
+};
+
+//TODO: make sure the api is called only once
+export const NowPlaying = ({
+  playing,
+  videoId,
+}: {
+  playing: boolean;
+  videoId: string;
+}) => {
+  const [data, setData] = useState<Metadata | null>(null);
+
+  useEffect(() => {
+    if (videoId) {
+      const fetchData = async () => {
+        const response = await fetch(
+          `https://noembed.com/embed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D${videoId}`,
+        );
+        const result: Metadata = await response.json();
+        setData(result);
+      };
+      fetchData();
+    }
+  }, [videoId]);
+
   return (
     <>
       {playing && (
@@ -15,7 +52,7 @@ export const NowPlaying = ({ playing }: { playing: boolean }) => {
         />
       )}
       <div className={"ml-2 text-2xl"}>
-        <h1>some random breakbeat mix</h1>
+        <h1>{data?.title ?? "searching..."}</h1>
       </div>
     </>
   );

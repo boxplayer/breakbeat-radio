@@ -14,13 +14,6 @@ export const breakIds = [
   "Owldd4hs7wQ&t",
 ];
 
-export const fetchData = async () => {
-  const metadata = await fetch(
-    "https://noembed.com/embed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DyEuXlaXdWhs",
-  );
-  return metadata;
-};
-
 const Home: NextPage = () => {
   const [introMessage, setIntroMessage] = useState(true);
   const [playing, setPlaying] = useState(false);
@@ -95,7 +88,7 @@ const Home: NextPage = () => {
                 />
               </div>
               <div className={`${styles.row} items-end mt-2`}>
-                <NowPlaying playing={playing} />
+                <NowPlaying playing={playing} videoId={currentTrack} />
               </div>
             </div>
           )}
