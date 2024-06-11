@@ -85,6 +85,10 @@ const Home: NextPage = () => {
           setCurrentTrack(TrackIds[currentTrackIndex + 1]);
         }
       }
+
+      if (e.code === "KeyR") {
+        setCurrentTrack(getRandomTrackId(TrackIds));
+      }
     }
 
     document.addEventListener("keydown", handleKeyDown);
