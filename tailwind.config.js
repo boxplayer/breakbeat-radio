@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+//TODO: remove backgroundImage?
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
