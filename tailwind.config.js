@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         "main-wall": "url('/lofi-wallpaper.jpg')",
+        "pc98-gif": "url('/gifs/pc-98-retro-game.gif')",
       },
     },
   },
