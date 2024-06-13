@@ -51,6 +51,7 @@ const Home: NextPage = () => {
   const [currentGifIndex, setCurrentGifIndex] = useState(0);
   const [showHelp, setShowHelp] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [lastTap, setLastTap] = useState(0);
 
   useEffect(() => {
     const userAgent =
@@ -126,13 +127,21 @@ const Home: NextPage = () => {
     }
 
     const handleTouch = () => {
-      if (introMessage === true) {
-        setIntroMessage(false);
-        setPlaying((prevProps) => !prevProps);
+      const now = Date.now();
+      const DOUBLE_TAP_DELAY = 300;
+
+      if (now - lastTap < DOUBLE_TAP_DELAY) {
+        setCurrentGifIndex((prevIndex) =>
+          prevIndex === GifTitles.length - 1 ? 0 : prevIndex + 1,
+        );
+      } else {
+        if (introMessage === true) {
+          setIntroMessage(false);
+          setPlaying((prevProps) => !prevProps);
+        }
       }
-      setCurrentGifIndex(
-        currentGifIndex === GifTitles.length - 1 ? 0 : currentGifIndex + 1,
-      );
+
+      setLastTap(now);
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -142,7 +151,7 @@ const Home: NextPage = () => {
       document.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("touchstart", handleTouch);
     };
-  }, [playing, introMessage, volume, currentTrack, currentGifIndex]);
+  }, [playing, introMessage, volume, currentTrack, currentGifIndex, lastTap]);
 
   return (
     <Background currentGifIndex={currentGifIndex}>
