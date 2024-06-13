@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Marquee from "react-fast-marquee";
 
 type Metadata = {
   width: number;
@@ -22,9 +23,11 @@ type Metadata = {
 export const NowPlaying = ({
   playing,
   videoId,
+  isMobile,
 }: {
   playing: boolean;
   videoId: string;
+  isMobile: boolean;
 }) => {
   const [data, setData] = useState<Metadata | null>(null);
 
@@ -53,9 +56,15 @@ export const NowPlaying = ({
       )}
       <div className={"ml-2 text-2xl"}>
         <h1>
-          <a href={data?.url} target="_blank">
-            {`${data?.title}  -  [${data?.author_name}]` ?? "searching..."}
-          </a>
+          {isMobile ? (
+            <Marquee>
+              <span>{`${data?.title} - [${data?.author_name}]}`}</span>
+            </Marquee>
+          ) : (
+            <a href={data?.url} target="_blank">
+              {`${data?.title}  -  [${data?.author_name}]` ?? "searching..."}
+            </a>
+          )}
         </h1>
       </div>
     </div>
