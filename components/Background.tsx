@@ -1,23 +1,43 @@
-import Image from "next/image";
+import React from "react";
 
-const GifTitles = [
+export const GifTitles = [
   "pc98-retro-game",
-  "arcade-gameover",
   "pool-girl",
+  "type",
+  "minecraft",
+  "game-controller",
+  "cyber-heart",
+  "link",
+  "cable-cubes",
   "runescape-dance",
+  "cyberpunk-darkroom",
+  "edward",
+  "cyberpunk-drive",
+  "arcade-guy",
+  "2d-game",
+  "night-ride",
+  "cyberpunk-mountains",
+  "initial-d-battle",
+  "sonic",
+  "dead-or-alive",
+  "cowboy-bebop",
 ];
 
-export default function Background({
+export const Background = ({
+  children,
   currentGifIndex,
 }: {
+  children: any;
   currentGifIndex: number;
-}) {
-  return (
-    <Image
-      alt="Mountains"
-      src={`/gifs/${GifTitles[currentGifIndex]}.gif`}
-      fill={true}
-      quality={100}
-    />
-  );
-}
+}) => (
+  <div className="relative min-h-screen">
+    <div
+      className="absolute inset-0 bg-cover bg-center bg-black before:absolute before:inset-0 before:bg-cover before:bg-center before:backdrop-blur-sm before:z-0 before:brightness-75"
+      style={{
+        backgroundImage: `url('/gifs/${GifTitles[currentGifIndex]}.gif')`,
+      }}
+    >
+      <div className="relative z-10">{children}</div>
+    </div>
+  </div>
+);

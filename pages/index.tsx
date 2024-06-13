@@ -7,7 +7,7 @@ import { MediaButtons } from "../components/MediaButtons";
 import { SocialMediaButtons } from "../components/SocialMediaButtons";
 import { NowPlaying } from "../components/NowPlaying";
 import { getRandomTrackId } from "../components/RandomTrackButton";
-import { GifTitles, Layout } from "../components/Layout";
+import { GifTitles, Background } from "../components/Background";
 
 export const TrackIds = [
   "8CHva3gBp68&t",
@@ -118,7 +118,7 @@ const Home: NextPage = () => {
   }, [playing, introMessage, volume, currentTrack, currentGifIndex]);
 
   return (
-    <Layout currentGifIndex={currentGifIndex}>
+    <Background currentGifIndex={currentGifIndex}>
       <div>
         <Head>
           <title>BREAKBEAT RADIO</title>
@@ -135,12 +135,16 @@ const Home: NextPage = () => {
             />
           </div>
 
-          <div className={`${styles.row} justify-between pt-3 p-8`}>
-            <h1 className={styles.title}>BREAKBEAT RADIO</h1>
+          <div
+            className={`${styles.row} justify-between pt-3 p-8 drop-shadow-[2px_2px_var(--tw-shadow-color)] shadow-blue-500`}
+          >
+            <h1 className={`${styles.title} `}>BREAKBEAT RADIO</h1>
             <SocialMediaButtons />
           </div>
 
-          <div className={`${styles.row} text-white align-center pb-3 p-8`}>
+          <div
+            className={`${styles.row} text-white align-center pb-3 p-8 drop-shadow-[2px_2px_var(--tw-shadow-color)] shadow-blue-500`}
+          >
             {introMessage ? (
               <p className={`text-2xl`}> Press space to start playing...</p>
             ) : (
@@ -155,7 +159,7 @@ const Home: NextPage = () => {
                     setCurrentTrack={setCurrentTrack}
                   />
                 </div>
-                <div className={`${styles.row} items-end mt-2`}>
+                <div className={`${styles.row} mt-2`}>
                   <NowPlaying playing={playing} videoId={currentTrack} />
                 </div>
               </div>
@@ -163,7 +167,7 @@ const Home: NextPage = () => {
           </div>
         </main>
       </div>
-    </Layout>
+    </Background>
   );
 };
 
