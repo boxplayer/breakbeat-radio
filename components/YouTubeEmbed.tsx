@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import React from "react";
-import { getRandomTrackId } from "./RandomTrackButton";
+import { getRandomTrackId } from "./MusicPlayerBar/RandomTrackButton";
 import { TrackIds } from "../pages";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 

@@ -2,7 +2,7 @@ import { IoLogoGithub } from "react-icons/io";
 
 const iconSize = 28;
 
-export const SocialMediaButtons = ({ showHelp }: { showHelp: boolean }) => {
+export const HelperPanel = ({ showHelp }: { showHelp: boolean }) => {
   return (
     <div className="flex flex-col items-center justify-center">
       <a target="_blank" href="https://github.com/boxplayer/breakbeat-radio">
@@ -16,6 +16,7 @@ export const SocialMediaButtons = ({ showHelp }: { showHelp: boolean }) => {
         <div className="hidden lg:block text-white text-xl mt-3">
           <div>{"h ‎ hide/show"}</div>
           <div>{"g ‎ change gif"}</div>
+          <div>{"r ‎ random mix"}</div>
           <div>{"→ ‎ next mix"}</div>
           <div>{"← ‎ previous mix"}</div>
           <div>{"↑ ‎ volume up"}</div>

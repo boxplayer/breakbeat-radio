@@ -33,7 +33,7 @@ export const Background = ({
 }) => (
   <div className="relative min-h-screen">
     <div
-      className="absolute inset-0 bg-cover bg-center bg-black before:absolute before:inset-0 before:bg-cover before:bg-center before:backdrop-blur-sm before:z-0 before:brightness-75"
+      className="absolute inset-0 bg-cover bg-center bg-black before:absolute before:inset-0 before:bg-cover before:bg-center lg:before:backdrop-blur-sm before:z-0 before:brightness-75"
       style={{
         backgroundImage: `url('/gifs/${GifTitles[currentGifIndex]}.gif')`,
       }}

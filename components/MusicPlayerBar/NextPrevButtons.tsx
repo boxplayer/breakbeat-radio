@@ -1,5 +1,5 @@
 import { IoPlayForward, IoPlayBack } from "react-icons/io5";
-import { TrackIds } from "../pages";
+import { TrackIds } from "../../pages";
 
 export const NextPrevButtons = ({
   currentTrack,

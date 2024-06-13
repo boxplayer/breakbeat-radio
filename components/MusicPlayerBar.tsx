@@ -1,9 +1,9 @@
-import { NextPrevButtons } from "./NextPrevButtons";
-import { PlayPauseButton } from "./PlayPauseButton";
-import { ShuffleButton } from "./RandomTrackButton";
-import { VolumeSlider } from "./VolumeSlider";
+import { NextPrevButtons } from "./MusicPlayerBar/NextPrevButtons";
+import { PlayPauseButton } from "./MusicPlayerBar/PlayPauseButton";
+import { ShuffleButton } from "./MusicPlayerBar/RandomTrackButton";
+import { VolumeSlider } from "./MusicPlayerBar/VolumeSlider";
 
-export const MediaButtons = ({
+export const MusicPlayerBar = ({
   volume,
   setVolume,
   playing,
