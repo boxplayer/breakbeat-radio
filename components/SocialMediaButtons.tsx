@@ -1,25 +1,29 @@
-import { IoLogoInstagram, IoLogoTwitter, IoLogoFacebook } from "react-icons/io";
+import { IoLogoGithub } from "react-icons/io";
 
-const iconSize = 24;
+const iconSize = 28;
 
-export const SocialMediaButtons = () => {
+export const SocialMediaButtons = ({ showHelp }: { showHelp: boolean }) => {
   return (
-    <div className={`flex items-center pl-10`}>
-      <IoLogoTwitter
-        className={"hover:ring-black m-1"}
-        color="white"
-        size={iconSize}
-      />
-      <IoLogoFacebook
-        className={"hover:bg-black m-1"}
-        color="white"
-        size={iconSize}
-      />
-      <IoLogoInstagram
-        className={"hover:bg-black m-1"}
-        color="white"
-        size={iconSize}
-      />
+    <div className="flex flex-col items-start">
+      <div className="pl-10">
+        <a target="_blank" href="https://github.com/boxplayer/breakbeat-radio">
+          <IoLogoGithub
+            className={"hover:scale-125 pl-1"}
+            color="white"
+            size={iconSize}
+          />
+        </a>
+      </div>
+      {showHelp && (
+        <div className="text-white text-xl mt-3">
+          <div>{"h ‎ hide/show"}</div>
+          <div>{"g ‎ change gif"}</div>
+          <div>{"→ ‎ next mix"}</div>
+          <div>{"← ‎ previous mix"}</div>
+          <div>{"↑ ‎ volume up"}</div>
+          <div>{"↓ ‎ volume down"}</div>
+        </div>
+      )}
     </div>
   );
 };

@@ -14,6 +14,7 @@ export const GifTitles = [
   "edward",
   "cyberpunk-drive",
   "arcade-guy",
+  "spike",
   "2d-game",
   "night-ride",
   "cyberpunk-mountains",

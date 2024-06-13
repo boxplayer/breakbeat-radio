@@ -31,7 +31,6 @@ export const TrackIds = [
   "3O3vncqnFWY",
   "0KgL3FwzjBE",
   "T_-jjh2sX4Q",
-  "j3l2t7H03k",
   "geL0UVnSfvQ",
   "knsIkEY4zoI",
   "pbXLQ2qvedU",
@@ -50,6 +49,7 @@ const Home: NextPage = () => {
   const [volume, setVolume] = useState(0.6);
   const [currentTrack, setCurrentTrack] = useState(getRandomTrackId(TrackIds));
   const [currentGifIndex, setCurrentGifIndex] = useState(0);
+  const [showHelp, setShowHelp] = useState(true);
 
   //TODO: export these to reusable functions
   useEffect(() => {
@@ -108,6 +108,10 @@ const Home: NextPage = () => {
           currentGifIndex === GifTitles.length - 1 ? 0 : currentGifIndex + 1,
         );
       }
+
+      if (e.code === "KeyH") {
+        setShowHelp((prevProps) => !prevProps);
+      }
     }
 
     document.addEventListener("keydown", handleKeyDown);
@@ -130,6 +134,7 @@ const Home: NextPage = () => {
           <div className={"fixed hidden items-center justify-center"}>
             <YouTubeEmbed
               videoId={currentTrack}
+              setCurrentTrack={setCurrentTrack}
               play={playing}
               volume={volume}
             />
@@ -139,7 +144,7 @@ const Home: NextPage = () => {
             className={`${styles.row} justify-between pt-3 p-8 drop-shadow-[2px_2px_var(--tw-shadow-color)] shadow-blue-500`}
           >
             <h1 className={`${styles.title} `}>BREAKBEAT RADIO</h1>
-            <SocialMediaButtons />
+            <SocialMediaButtons showHelp={showHelp} />
           </div>
 
           <div

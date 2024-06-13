@@ -52,7 +52,11 @@ export const NowPlaying = ({
         />
       )}
       <div className={"ml-2 text-2xl"}>
-        <h1>{data?.title ?? "searching..."}</h1>
+        <h1>
+          <a href={data?.url} target="_blank">
+            {`${data?.title}  -  [${data?.author_name}]` ?? "searching..."}
+          </a>
+        </h1>
       </div>
     </>
   );
