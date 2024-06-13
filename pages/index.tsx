@@ -50,6 +50,17 @@ const Home: NextPage = () => {
   const [currentTrack, setCurrentTrack] = useState(getRandomTrackId(TrackIds));
   const [currentGifIndex, setCurrentGifIndex] = useState(0);
   const [showHelp, setShowHelp] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const userAgent =
+      typeof window.navigator === "undefined" ? "" : navigator.userAgent;
+    const mobile =
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
+        userAgent,
+      );
+    setIsMobile(mobile);
+  }, []);
 
   //TODO: export these to reusable functions
   useEffect(() => {
@@ -114,10 +125,22 @@ const Home: NextPage = () => {
       }
     }
 
+    const handleTouch = () => {
+      if (introMessage === true) {
+        setIntroMessage(false);
+        setPlaying((prevProps) => !prevProps);
+      }
+      setCurrentGifIndex(
+        currentGifIndex === GifTitles.length - 1 ? 0 : currentGifIndex + 1,
+      );
+    };
+
     document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("touchstart", handleTouch);
 
     return function cleanup() {
       document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("touchstart", handleTouch);
     };
   }, [playing, introMessage, volume, currentTrack, currentGifIndex]);
 
@@ -151,7 +174,11 @@ const Home: NextPage = () => {
             className={`${styles.row} text-white align-center pb-3 p-8 drop-shadow-[2px_2px_var(--tw-shadow-color)] shadow-blue-500`}
           >
             {introMessage ? (
-              <p className={`text-2xl`}> Press space to start playing...</p>
+              <p className={`text-2xl`}>
+                {isMobile
+                  ? "Tap to start playing..."
+                  : "Press space to start playing..."}
+              </p>
             ) : (
               <div>
                 <div className={styles.row}>

@@ -42,7 +42,7 @@ export const NowPlaying = ({
   }, [videoId]);
 
   return (
-    <>
+    <div className="flex flex-row">
       {playing && (
         <Image
           width={32}
@@ -58,6 +58,6 @@ export const NowPlaying = ({
           </a>
         </h1>
       </div>
-    </>
+    </div>
   );
 };
