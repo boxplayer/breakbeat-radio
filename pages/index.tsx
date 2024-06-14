@@ -71,64 +71,43 @@ const Home: NextPage = () => {
     setIsMobile(mobile);
   }, []);
 
-  //TODO: export these to reusable functions
   useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent): any {
-      if (e.code === "Space" && introMessage === true) {
-        e.preventDefault();
-        setIntroMessage(false);
-      }
+    function handleKeyDown(e: KeyboardEvent): void {
+      e.preventDefault();
 
-      if (e.code === "Space") {
-        e.preventDefault();
-        setPlaying((prevProps) => !prevProps);
-      }
+      console.log(e.code);
+      switch (e.code) {
+        case "Space":
+          if (introMessage) {
+            setIntroMessage(false);
+          } else {
+            setPlaying((prevProps) => !prevProps);
+          }
+          break;
 
-      if (e.code === "ArrowUp") {
-        e.preventDefault();
-        if (volume <= 0.8) {
-          setVolume((prevProps) => prevProps + 0.2);
-        }
-      }
+        case "ArrowDown":
+          setVolume((prevProps) => prevProps - (prevProps <= 0 ? 0.0 : 0.2));
+          break;
 
-      if (e.code === "ArrowDown") {
-        e.preventDefault();
-        if (volume > 0) {
-          setVolume((prevProps) => prevProps - 0.2);
-        }
-      }
+        case "ArrowUp":
+          setVolume((prevProps) => prevProps + (prevProps >= 1 ? 0 : 0.2));
+          break;
 
-      if (e.code === "ArrowLeft") {
-        e.preventDefault();
-        if (currentTrackIndex === 0) {
-          setCurrentTrackIndex(TrackIds.length - 1);
-        } else {
-          setCurrentTrackIndex(currentTrackIndex - 1);
-        }
-      }
+        case "ArrowLeft":
+          setCurrentTrackIndex((c) => (c === 0 ? TrackIds.length - 1 : c - 1));
+          break;
 
-      if (e.code === "ArrowRight") {
-        e.preventDefault();
+        case "ArrowRight":
+          setCurrentTrackIndex((c) => (c === TrackIds.length ? 0 : c + 1));
 
-        if (currentTrackIndex === TrackIds.length) {
-          setCurrentTrackIndex(0);
-        } else {
-          setCurrentTrackIndex(currentTrackIndex + 1);
-        }
-      }
+        case "KeyR":
+          setCurrentTrackIndex(getRandomTrackId());
 
-      if (e.code === "KeyR") {
-        setCurrentTrackIndex(getRandomTrackId());
-      }
+        case "KeyG":
+          setCurrentGifIndex((c) => (c === GifTitles.length - 1 ? 0 : c + 1));
 
-      if (e.code === "KeyG") {
-        setCurrentGifIndex(
-          currentGifIndex === GifTitles.length - 1 ? 0 : currentGifIndex + 1,
-        );
-      }
-
-      if (e.code === "KeyH") {
-        setShowHelp((prevProps) => !prevProps);
+        case "KeyH":
+          setShowHelp((prevProps) => !prevProps);
       }
     }
 
@@ -143,8 +122,8 @@ const Home: NextPage = () => {
       } else {
         if (introMessage === true) {
           setIntroMessage(false);
-          setPlaying((prevProps) => !prevProps);
         }
+        setPlaying((prevProps) => !prevProps);
       }
 
       setLastTap(now);
@@ -153,18 +132,11 @@ const Home: NextPage = () => {
     document.addEventListener("keydown", handleKeyDown);
     window.addEventListener("touchstart", handleTouch);
 
-    return function cleanup() {
+    return () => {
       document.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("touchstart", handleTouch);
     };
-  }, [
-    playing,
-    introMessage,
-    volume,
-    currentTrackIndex,
-    currentGifIndex,
-    lastTap,
-  ]);
+  }, [introMessage, lastTap]);
 
   return (
     <Background currentGifIndex={currentGifIndex}>
