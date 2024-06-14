@@ -5,7 +5,6 @@ import styles from "../styles/Home.module.css";
 import { YouTubeEmbed } from "../components/YouTubeEmbed";
 import { MusicPlayerBar } from "../components/MusicPlayerBar";
 import { HelperPanel } from "../components/HelperPanel";
-import { NowPlaying } from "../components/MusicPlayerBar/NowPlaying";
 import { getRandomTrackId } from "../components/MusicPlayerBar/RandomTrackButton";
 import { GifTitles, Background } from "../components/Background";
 
@@ -73,6 +72,10 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent): void {
+      if (e.ctrlKey || e.shiftKey || e.altKey || e.metaKey) {
+        return;
+      }
+
       e.preventDefault();
 
       console.log(e.code);
@@ -99,15 +102,19 @@ const Home: NextPage = () => {
 
         case "ArrowRight":
           setCurrentTrackIndex((c) => (c === TrackIds.length ? 0 : c + 1));
+          break;
 
         case "KeyR":
           setCurrentTrackIndex(getRandomTrackId());
+          break;
 
         case "KeyG":
           setCurrentGifIndex((c) => (c === GifTitles.length - 1 ? 0 : c + 1));
+          break;
 
         case "KeyH":
           setShowHelp((prevProps) => !prevProps);
+          break;
       }
     }
 
@@ -161,7 +168,7 @@ const Home: NextPage = () => {
           </div>
           <div className={`${styles.row} justify-between pt-3 p-8`}>
             <h1 className={`${styles.title} `}>BREAKBEAT RADIO</h1>
-            <HelperPanel showHelp={showHelp} />
+            {showHelp && <HelperPanel />}
           </div>
           <div className={`${styles.row} text-white align-center pb-3 p-8`}>
             {introMessage ? (
