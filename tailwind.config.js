@@ -6,6 +6,9 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    dropShadow: {
+      radio: "2px 2px var(--tw-shadow-color)",
+    },
     extend: {
       backgroundImage: {
         "main-wall": "url('/lofi-wallpaper.jpg')",

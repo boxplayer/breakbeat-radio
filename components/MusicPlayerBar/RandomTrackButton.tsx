@@ -1,16 +1,16 @@
 import { IoShuffle } from "react-icons/io5";
 import { TrackIds } from "../../pages";
 
-export const getRandomTrackId = (TrackIds: string[]) =>
-  TrackIds[Math.floor(Math.random() * TrackIds.length)];
+export const getRandomTrackId = () =>
+  Math.floor(Math.random() * TrackIds.length);
 
 export const ShuffleButton = ({
-  setCurrentTrack,
+  setCurrentTrackIndex,
 }: {
-  setCurrentTrack: (value: string) => void;
+  setCurrentTrackIndex: (value: number) => void;
 }) => (
   <IoShuffle
     size={30}
-    onClick={() => setCurrentTrack(getRandomTrackId(TrackIds))}
+    onClick={() => setCurrentTrackIndex(getRandomTrackId())}
   />
 );

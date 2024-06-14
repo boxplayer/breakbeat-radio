@@ -1,4 +1,6 @@
+import styles from "../styles/Home.module.css";
 import { NextPrevButtons } from "./MusicPlayerBar/NextPrevButtons";
+import { NowPlaying } from "./MusicPlayerBar/NowPlaying";
 import { PlayPauseButton } from "./MusicPlayerBar/PlayPauseButton";
 import { ShuffleButton } from "./MusicPlayerBar/RandomTrackButton";
 import { VolumeSlider } from "./MusicPlayerBar/VolumeSlider";
@@ -8,33 +10,42 @@ export const MusicPlayerBar = ({
   setVolume,
   playing,
   setPlaying,
-  currentTrack,
-  setCurrentTrack,
+  currentTrackIndex,
+  setCurrentTrackIndex,
   isMobile,
 }: {
   volume: number;
   setVolume: (value: number) => void;
   playing: boolean;
   setPlaying: (value: boolean) => void;
-  currentTrack: string;
-  setCurrentTrack: (value: string) => void;
+  currentTrackIndex: number;
+  setCurrentTrackIndex: (value: number) => void;
   isMobile: boolean;
 }) => (
-  <>
-    <div className={"mr-2"}>
-      <PlayPauseButton playing={playing} setPlaying={setPlaying} />
-    </div>
-    <div className={"mr-2"}>
-      <NextPrevButtons
-        currentTrack={currentTrack}
-        setCurrentTrack={setCurrentTrack}
+  <div className={styles.row}>
+    <>
+      <div className={"mr-2"}>
+        <PlayPauseButton playing={playing} setPlaying={setPlaying} />
+      </div>
+      <div className={"mr-2"}>
+        <NextPrevButtons
+          currentTrackIndex={currentTrackIndex}
+          setCurrentTrackIndex={setCurrentTrackIndex}
+        />
+      </div>
+      <div className={"mr-2"}>
+        <ShuffleButton setCurrentTrackIndex={setCurrentTrackIndex} />
+      </div>
+      <div className={"mr-2 flex"}>
+        {!isMobile && <VolumeSlider volume={volume} setVolume={setVolume} />}
+      </div>
+    </>
+    <div className={`${styles.row} mt-2`}>
+      <NowPlaying
+        playing={playing}
+        currentTrackIndex={currentTrackIndex}
+        isMobile={isMobile}
       />
     </div>
-    <div className={"mr-2"}>
-      <ShuffleButton setCurrentTrack={setCurrentTrack} />
-    </div>
-    <div className={"mr-2 flex"}>
-      {!isMobile && <VolumeSlider volume={volume} setVolume={setVolume} />}
-    </div>
-  </>
+  </div>
 );

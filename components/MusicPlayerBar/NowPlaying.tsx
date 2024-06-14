@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
+import { TrackIds } from "../../pages";
 
 type Metadata = {
   width: number;
@@ -19,30 +20,29 @@ type Metadata = {
   version: string;
 };
 
-// TODO: possible to get track id?
 export const NowPlaying = ({
   playing,
-  videoId,
+  currentTrackIndex,
   isMobile,
 }: {
   playing: boolean;
-  videoId: string;
+  currentTrackIndex: number;
   isMobile: boolean;
 }) => {
   const [data, setData] = useState<Metadata | null>(null);
 
   useEffect(() => {
-    if (videoId) {
+    if (currentTrackIndex) {
       const fetchData = async () => {
         const response = await fetch(
-          `https://noembed.com/embed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D${videoId}`,
+          `https://noembed.com/embed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D${TrackIds[currentTrackIndex]}`,
         );
         const result: Metadata = await response.json();
         setData(result);
       };
       fetchData();
     }
-  }, [videoId]);
+  }, [currentTrackIndex]);
 
   return (
     <div className="flex flex-row">

@@ -54,7 +54,8 @@ const Home: NextPage = () => {
   const [introMessage, setIntroMessage] = useState(true);
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.6);
-  const [currentTrack, setCurrentTrack] = useState(getRandomTrackId(TrackIds));
+  const [currentTrackIndex, setCurrentTrackIndex] =
+    useState(getRandomTrackId());
   const [currentGifIndex, setCurrentGifIndex] = useState(0);
   const [showHelp, setShowHelp] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -99,27 +100,25 @@ const Home: NextPage = () => {
 
       if (e.code === "ArrowLeft") {
         e.preventDefault();
-        const currentTrackIndex = TrackIds.indexOf(currentTrack);
         if (currentTrackIndex === 0) {
-          setCurrentTrack(TrackIds[TrackIds.length - 1]);
+          setCurrentTrackIndex(TrackIds.length - 1);
         } else {
-          setCurrentTrack(TrackIds[currentTrackIndex - 1]);
+          setCurrentTrackIndex(currentTrackIndex - 1);
         }
       }
 
       if (e.code === "ArrowRight") {
         e.preventDefault();
 
-        const currentTrackIndex = TrackIds.indexOf(currentTrack);
         if (currentTrackIndex === TrackIds.length) {
-          setCurrentTrack(TrackIds[0]);
+          setCurrentTrackIndex(0);
         } else {
-          setCurrentTrack(TrackIds[currentTrackIndex + 1]);
+          setCurrentTrackIndex(currentTrackIndex + 1);
         }
       }
 
       if (e.code === "KeyR") {
-        setCurrentTrack(getRandomTrackId(TrackIds));
+        setCurrentTrackIndex(getRandomTrackId());
       }
 
       if (e.code === "KeyG") {
@@ -158,7 +157,14 @@ const Home: NextPage = () => {
       document.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("touchstart", handleTouch);
     };
-  }, [playing, introMessage, volume, currentTrack, currentGifIndex, lastTap]);
+  }, [
+    playing,
+    introMessage,
+    volume,
+    currentTrackIndex,
+    currentGifIndex,
+    lastTap,
+  ]);
 
   return (
     <Background currentGifIndex={currentGifIndex}>
@@ -168,26 +174,24 @@ const Home: NextPage = () => {
           <meta name="description" content="Welcome to the breakbeat zone" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main className={"h-dvh flex flex-col justify-between"}>
+        <main
+          className={
+            "h-dvh flex flex-col justify-between drop-shadow-radio shadow-blue-500"
+          }
+        >
           <div className={"fixed hidden items-center justify-center"}>
             <YouTubeEmbed
-              videoId={currentTrack}
-              setCurrentTrack={setCurrentTrack}
+              currentTrackIndex={currentTrackIndex}
+              setCurrentTrackIndex={setCurrentTrackIndex}
               play={playing}
               volume={volume}
             />
           </div>
-
-          <div
-            className={`${styles.row} justify-between pt-3 p-8 drop-shadow-[2px_2px_var(--tw-shadow-color)] shadow-blue-500`}
-          >
+          <div className={`${styles.row} justify-between pt-3 p-8`}>
             <h1 className={`${styles.title} `}>BREAKBEAT RADIO</h1>
             <HelperPanel showHelp={showHelp} />
           </div>
-
-          <div
-            className={`${styles.row} text-white align-center pb-3 p-8 drop-shadow-[2px_2px_var(--tw-shadow-color)] shadow-blue-500`}
-          >
+          <div className={`${styles.row} text-white align-center pb-3 p-8`}>
             {introMessage ? (
               <p className={`text-2xl`}>
                 {isMobile
@@ -202,15 +206,8 @@ const Home: NextPage = () => {
                     setVolume={setVolume}
                     playing={playing}
                     setPlaying={setPlaying}
-                    currentTrack={currentTrack}
-                    setCurrentTrack={setCurrentTrack}
-                    isMobile={isMobile}
-                  />
-                </div>
-                <div className={`${styles.row} mt-2`}>
-                  <NowPlaying
-                    playing={playing}
-                    videoId={currentTrack}
+                    currentTrackIndex={currentTrackIndex}
+                    setCurrentTrackIndex={setCurrentTrackIndex}
                     isMobile={isMobile}
                   />
                 </div>

@@ -5,25 +5,25 @@ import { TrackIds } from "../pages";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 export const YouTubeEmbed = ({
-  videoId,
-  setCurrentTrack,
+  currentTrackIndex,
+  setCurrentTrackIndex,
   play,
   volume,
 }: {
-  videoId: string;
-  setCurrentTrack: (value: string) => void;
+  currentTrackIndex: number;
+  setCurrentTrackIndex: (value: number) => void;
   play: boolean;
   volume: number;
 }) => (
   <div>
     <ReactPlayer
-      url={`https://www.youtube.com/watch?v=${videoId}`}
+      url={`https://www.youtube.com/watch?v=${TrackIds[currentTrackIndex]}`}
       playing={play}
       volume={volume}
       loop={true}
       onError={() => {
-        console.log(`erroring track: ${videoId}`);
-        setCurrentTrack(getRandomTrackId(TrackIds));
+        console.log(`erroring track: ${TrackIds[currentTrackIndex]}`);
+        setCurrentTrackIndex(getRandomTrackId());
       }}
     />
   </div>
