@@ -203,6 +203,7 @@ const Home: NextPage = () => {
                     setPlaying={setPlaying}
                     currentTrack={currentTrack}
                     setCurrentTrack={setCurrentTrack}
+                    isMobile={isMobile}
                   />
                 </div>
                 <div className={`${styles.row} mt-2`}>

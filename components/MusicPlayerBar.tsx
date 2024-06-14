@@ -10,6 +10,7 @@ export const MusicPlayerBar = ({
   setPlaying,
   currentTrack,
   setCurrentTrack,
+  isMobile,
 }: {
   volume: number;
   setVolume: (value: number) => void;
@@ -17,6 +18,7 @@ export const MusicPlayerBar = ({
   setPlaying: (value: boolean) => void;
   currentTrack: string;
   setCurrentTrack: (value: string) => void;
+  isMobile: boolean;
 }) => (
   <>
     <div className={"mr-2"}>
@@ -32,7 +34,7 @@ export const MusicPlayerBar = ({
       <ShuffleButton setCurrentTrack={setCurrentTrack} />
     </div>
     <div className={"mr-2 flex"}>
-      <VolumeSlider volume={volume} setVolume={setVolume} />
+      {!isMobile && <VolumeSlider volume={volume} setVolume={setVolume} />}
     </div>
   </>
 );
