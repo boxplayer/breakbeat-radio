@@ -5,13 +5,13 @@ const iconSize = 28;
 export const HelperPanel = ({ showHelp }: { showHelp: boolean }) => {
   return (
     <div className="flex flex-col items-center justify-center">
-      {/* <a target="_blank" href="https://github.com/boxplayer/breakbeat-radio"> */}
-      {/*   <IoLogoGithub */}
-      {/*     className={"hover:scale-125 pl-1"} */}
-      {/*     color="white" */}
-      {/*     size={iconSize} */}
-      {/*   /> */}
-      {/* </a> */}
+      <a target="_blank" href="https://github.com/boxplayer/breakbeat-radio">
+        <IoLogoGithub
+          className={"hover:scale-125 pl-1"}
+          color="white"
+          size={iconSize}
+        />
+      </a>
       {showHelp && (
         <div className="hidden lg:block text-white text-xl mt-3">
           <div>{"h ‎ hide/show"}</div>
