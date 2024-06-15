@@ -78,7 +78,6 @@ const Home: NextPage = () => {
 
       e.preventDefault();
 
-      console.log(e.code);
       switch (e.code) {
         case "Space":
           if (introMessage) {
@@ -129,8 +128,8 @@ const Home: NextPage = () => {
       } else {
         if (introMessage === true) {
           setIntroMessage(false);
+          setPlaying((prevProps) => !prevProps);
         }
-        setPlaying((prevProps) => !prevProps);
       }
 
       setLastTap(now);
