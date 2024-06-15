@@ -32,16 +32,18 @@ export const NowPlaying = ({
   const [data, setData] = useState<Metadata | null>(null);
 
   useEffect(() => {
-    if (currentTrackIndex) {
-      const fetchData = async () => {
+    const fetchData = async () => {
+      try {
         const response = await fetch(
           `https://noembed.com/embed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D${TrackIds[currentTrackIndex]}`,
         );
         const result: Metadata = await response.json();
         setData(result);
-      };
-      fetchData();
-    }
+      } catch (error) {
+        console.log("Failed to fetch metadata", error);
+      }
+    };
+    fetchData();
   }, [currentTrackIndex]);
 
   return (

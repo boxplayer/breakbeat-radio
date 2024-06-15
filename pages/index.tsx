@@ -82,6 +82,7 @@ const Home: NextPage = () => {
         case "Space":
           if (introMessage) {
             setIntroMessage(false);
+            setPlaying(true);
           } else {
             setPlaying((prevProps) => !prevProps);
           }
