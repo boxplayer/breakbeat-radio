@@ -5,56 +5,17 @@ import styles from "../styles/Home.module.css";
 import { YouTubeEmbed } from "../components/YouTubeEmbed";
 import { MusicPlayerBar } from "../components/MusicPlayerBar";
 import { HelperPanel } from "../components/HelperPanel";
-import { getRandomTrackId } from "../components/MusicPlayerBar/RandomTrackButton";
+import { getRandomTrackIndex } from "../components/MusicPlayerBar/RandomTrackButton";
 import { GifTitles, Background } from "../components/Background";
-
-export const TrackIds = [
-  "8CHva3gBp68&t",
-  "zSCzORZQsjQ",
-  "A9UW7i6Pj3Q",
-  "Owldd4hs7wQ&t",
-  "8diCWQ5HU0I",
-  "wMFfy9-VS6Y",
-  "pCGmlm8HvBI",
-  "DrmpZtxr0kY",
-  "qXfdneeIZnw",
-  "83YU83Q0jXA",
-  "yEUOXeTccSk",
-  "ulU8B-FdABA",
-  "u9o1OYX5UOQ",
-  "xgvpvO2Fx8U",
-  "MUoCWXwPUIM",
-  "9dKSf8IlXNM",
-  "vRZHyKnCPZU",
-  "0KaBYaQGwbs",
-  "3O3vncqnFWY",
-  "0KgL3FwzjBE",
-  "T_-jjh2sX4Q",
-  "geL0UVnSfvQ",
-  "knsIkEY4zoI",
-  "pbXLQ2qvedU",
-  "z70z6BS4CfE",
-  "CtCgNRquauE",
-  "0HXTXQ--dBA",
-  "kmLT1NvsI4Y",
-  "twBcMibg1Vs",
-  "pC-hxUhVLEc",
-  "r8SASJoZNow",
-  "X3p8P6-fWyA",
-  "ugiugMgIiZw",
-  "NEqi5iOahuk",
-  "5xOjS99celY",
-  "BZxvZBmKTGg",
-  "jsd2VSZVTF8",
-  "OL0NVBGEFoc",
-];
+import { TrackIds } from "../components/YouTubeEmbed";
 
 const Home: NextPage = () => {
   const [introMessage, setIntroMessage] = useState(true);
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.6);
-  const [currentTrackIndex, setCurrentTrackIndex] =
-    useState(getRandomTrackId());
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(
+    getRandomTrackIndex(),
+  );
   const [currentGifIndex, setCurrentGifIndex] = useState(0);
   const [showHelp, setShowHelp] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -105,7 +66,7 @@ const Home: NextPage = () => {
           break;
 
         case "KeyR":
-          setCurrentTrackIndex(getRandomTrackId());
+          setCurrentTrackIndex(getRandomTrackIndex());
           break;
 
         case "KeyG":

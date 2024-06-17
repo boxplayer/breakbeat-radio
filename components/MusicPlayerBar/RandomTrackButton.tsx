@@ -1,7 +1,7 @@
 import { IoShuffle } from "react-icons/io5";
-import { TrackIds } from "../../pages";
+import { TrackIds } from "../YouTubeEmbed";
 
-export const getRandomTrackId = () =>
+export const getRandomTrackIndex = () =>
   Math.floor(Math.random() * TrackIds.length);
 
 export const ShuffleButton = ({
@@ -11,6 +11,6 @@ export const ShuffleButton = ({
 }) => (
   <IoShuffle
     size={30}
-    onClick={() => setCurrentTrackIndex(getRandomTrackId())}
+    onClick={() => setCurrentTrackIndex(getRandomTrackIndex())}
   />
 );

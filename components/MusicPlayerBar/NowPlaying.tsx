@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
-import { TrackIds } from "../../pages";
+import { TrackIds } from "../YouTubeEmbed";
 
 type Metadata = {
   width: number;
