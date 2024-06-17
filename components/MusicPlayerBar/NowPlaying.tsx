@@ -23,11 +23,9 @@ type Metadata = {
 export const NowPlaying = ({
   playing,
   currentTrackIndex,
-  isMobile,
 }: {
   playing: boolean;
   currentTrackIndex: number;
-  isMobile: boolean;
 }) => {
   const [data, setData] = useState<Metadata | null>(null);
 
@@ -58,15 +56,16 @@ export const NowPlaying = ({
       )}
       <div className={"ml-2 text-2xl"}>
         <h1>
-          {isMobile ? (
+          <div className="mobile">
             <Marquee>
               <span>{`${data?.title} - [${data?.author_name}]}`}</span>
             </Marquee>
-          ) : (
+          </div>
+          <div className="desktop">
             <a href={data?.url} target="_blank">
               {`${data?.title}  -  [${data?.author_name}]` ?? "searching..."}
             </a>
-          )}
+          </div>
         </h1>
       </div>
     </div>

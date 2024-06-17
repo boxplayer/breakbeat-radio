@@ -31,3 +31,17 @@ a {
     background: black;
   }
 }
+
+.mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile {
+    display: block;
+  }
+
+  .desktop {
+    display: none;
+  }
+}

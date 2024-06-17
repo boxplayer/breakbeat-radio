@@ -18,18 +18,7 @@ const Home: NextPage = () => {
   );
   const [currentGifIndex, setCurrentGifIndex] = useState(0);
   const [showHelp, setShowHelp] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
   const [lastTap, setLastTap] = useState(0);
-
-  useEffect(() => {
-    const userAgent =
-      typeof window.navigator === "undefined" ? "" : navigator.userAgent;
-    const mobile =
-      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
-        userAgent,
-      );
-    setIsMobile(mobile);
-  }, []);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent): void {
@@ -133,11 +122,12 @@ const Home: NextPage = () => {
           </div>
           <div className={`${styles.row} text-white align-center pb-3 p-8`}>
             {introMessage ? (
-              <p className={`text-2xl`}>
-                {isMobile
-                  ? "Tap to start playing..."
-                  : "Press space to start playing..."}
-              </p>
+              <div>
+                <p className={`text-2xl desktop`}>
+                  {"Press space to start playing..."}
+                </p>
+                <p className={`text-2xl mobile`}>{"Tap to start playing..."}</p>
+              </div>
             ) : (
               <div>
                 <div className={styles.row}>
@@ -148,7 +138,6 @@ const Home: NextPage = () => {
                     setPlaying={setPlaying}
                     currentTrackIndex={currentTrackIndex}
                     setCurrentTrackIndex={setCurrentTrackIndex}
-                    isMobile={isMobile}
                   />
                 </div>
               </div>

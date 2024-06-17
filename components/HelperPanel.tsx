@@ -12,7 +12,7 @@ export const HelperPanel = () => {
           size={iconSize}
         />
       </a>
-      <div className="hidden lg:block text-white text-xl mt-3">
+      <div className="desktop text-white text-xl mt-3">
         <div>{"h ‎ hide/show"}</div>
         <div>{"g ‎ change gif"}</div>
         <div>{"r ‎ random mix"}</div>
