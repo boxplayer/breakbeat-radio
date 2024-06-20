@@ -58,7 +58,12 @@ export const NowPlaying = ({
         <h1>
           <div className="mobile">
             <Marquee>
-              <span>{`${data?.title} - [${data?.author_name}]}`}</span>
+              <span>
+                <a
+                  href={data?.url}
+                  target="_blank"
+                >{`${data?.title} - [${data?.author_name}]}`}</a>
+              </span>
             </Marquee>
           </div>
           <div className="desktop">
