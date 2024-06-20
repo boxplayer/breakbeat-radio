@@ -8,8 +8,16 @@ export const PlayPauseButton = ({
   setPlaying: (value: boolean) => void;
 }) => {
   return playing ? (
-    <IoPause className={"hover:"} size={30} onClick={() => setPlaying(false)} />
+    <IoPause
+      className={"hover:scale-125 pl-1"}
+      size={30}
+      onClick={() => setPlaying(false)}
+    />
   ) : (
-    <IoPlay size={30} onClick={() => setPlaying(true)} />
+    <IoPlay
+      className={"hover:scale-125 pl-1"}
+      size={30}
+      onClick={() => setPlaying(true)}
+    />
   );
 };

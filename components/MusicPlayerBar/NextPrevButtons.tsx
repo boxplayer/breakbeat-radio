@@ -11,6 +11,7 @@ export const NextPrevButtons = ({
   <div className="flex flex-row space-x-2">
     <IoPlayBack
       size={30}
+      className={"hover:scale-125 pl-1"}
       onClick={() => {
         if (currentTrackIndex === 0) {
           setCurrentTrackIndex(TrackIds.length - 1);
@@ -21,6 +22,7 @@ export const NextPrevButtons = ({
     />
     <IoPlayForward
       size={30}
+      className={"hover:scale-125 pl-1"}
       onClick={() => {
         if (currentTrackIndex === TrackIds.length) {
           setCurrentTrackIndex(0);

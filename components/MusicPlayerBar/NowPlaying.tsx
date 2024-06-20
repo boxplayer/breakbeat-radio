@@ -45,7 +45,7 @@ export const NowPlaying = ({
   }, [currentTrackIndex]);
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row hover:scale-105">
       {playing && (
         <Image
           width={32}
