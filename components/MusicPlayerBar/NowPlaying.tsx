@@ -62,7 +62,7 @@ export const NowPlaying = ({
                 <a
                   href={data?.url}
                   target="_blank"
-                >{`${data?.title} - [${data?.author_name}]}`}</a>
+                >{`${data?.title} - [${data?.author_name}]}‎`}</a>
               </span>
             </Marquee>
           </div>
