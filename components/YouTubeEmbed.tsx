@@ -4,6 +4,7 @@ import { getRandomTrackIndex } from "./MusicPlayerBar/RandomTrackButton";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 export const TrackIds = [
+  "vRxZ-v8yL1s",
   "u9o1OYX5UOQ",
   "zSCzORZQsjQ",
   "A9UW7i6Pj3Q",
